@@ -1,45 +1,45 @@
 <?php namespace App\Controllers;
 
-use App\Models\ProductModel;
+use App\Models\ProveedoresModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class ProductController extends ResourceController
+class ProveedoresController extends ResourceController
 {
 
     use ResponseTrait;
 
     public function index()
     {
-        $model = new ProductModel();
+        $model = new ProveedoresModel();
 
         $data = [
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de productos'
+                'success' => 'Lista de proveedores'
             ]
         ];
 
-        $data['Products'] = $model->orderBy('prd_id', 'DESC')->findAll();
+        $data['Proveedores'] = $model->orderBy('pro_id ', 'DESC')->findAll();
 
         return $this->respond($data);
     }
 
     public function getProduct($id = null)
     {
-        $model = new ProductModel();
+        $model = new ProveedoresModel();
 
-        $response = $model->where('prd_id', $id)->first();
+        $response = $model->where('pro_id ', $id)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Proveedor Encontrado'
                 ],
-                'Product'  => $response
+                'Proveedores'  => $response
             ];
 
             return $this->respond($data);
@@ -48,7 +48,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Proveedor No Existe'
                 ]
             ];
 
@@ -60,17 +60,17 @@ class ProductController extends ResourceController
 
     public function getProductName($name = null)
     {
-        $model    = new ProductModel();
-        $response = $model->where('prd_nombre', $name)->first();
+        $model    = new ProveedoresModel();
+        $response = $model->where('pro_nit', $name)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Proveedor Encontrado'
                 ],
-                'Product'  => $response
+                'Proveedores'  => $response
             ];
 
             return $this->respond($data);
@@ -79,7 +79,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Proveedor No Existe'
                 ]
             ];
 
@@ -90,22 +90,18 @@ class ProductController extends ResourceController
 
     public function create()
     {
-        $model = new ProductModel();
+        $model = new ProveedoresModel();
         $data  = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
-            'ma_id'      => $this->request->getVar('ma_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'pro_nit' => $this->request->getVar('pro_nit'),
+            'pro_nombre'   => $this->request->getVar('pro_nombre')
+           
         ];
         $model->insert($data);
         $response = [
             'status'   => 201,
             'error'    => false,
             'messages' => [
-                'success' => 'Producto Creado'
+                'success' => 'Proveedor Creado'
             ]
         ];
         return $this->respondCreated($response);
@@ -113,49 +109,45 @@ class ProductController extends ResourceController
 
     public function updateProduct()
     {
-        $model  = new ProductModel();
-        $prd_id = $this->request->getVar('prd_id');
+        $model  = new ProveedoresModel();
+        $pro_id  = $this->request->getVar('pro_id ');
 
         $data = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
-            'ma_id'      => $this->request->getVar('ma_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'pro_nit' => $this->request->getVar('pro_nit'),
+            'pro_nombre'   => $this->request->getVar('pro_nombre')
+            
         ];
 
         //$dt = $this->request->getRawInput();
 
         // print_r($dt);
-        $model->update($prd_id, $data);
+        $model->update($pro_id , $data);
         $response = [
             'status'   => 200,
             'error'    => null,
             'messages' => [
-                'success' => 'Producto Actualizado'
+                'success' => 'Proveedor Actualizado'
             ]
         ];
         return $this->respond($response);
     }
 
-    public function delete($prd_id = null)
+    public function delete($pro_id  = null)
     {
-        $model = new ProductModel();
-        $data  = $model->where('prd_id', $prd_id)->delete($prd_id);
+        $model = new ProveedoresModel();
+        $data  = $model->where('pro_id ', $pro_id )->delete($pro_id );
         if ($data) {
-            $model->delete($prd_id);
+            $model->delete($pro_id );
             $response = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Eliminado'
+                    'success' => 'Proveedor Eliminado'
                 ]
             ];
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Producto No Existe');
+            return $this->failNotFound('Proveedor No Existe');
         }
     }
 

@@ -48,6 +48,16 @@ $routes->post('/marcas/add', 'MarcaController::create');
 $routes->post('/marcas/update', 'MarcaController::updateMarca');
 $routes->delete('/marcas/delete/(:num)', 'MarcaController::delete/$1');
 
+
+// rutas proveedores 
+$routes->get('/proveedores', 'ProveedoresController::index');
+$routes->get('/proveedores/(:num)', 'ProveedoresController::getproveedores/$1');
+$routes->get('/proveedores/(:any)', 'ProveedoresController::getproveedoresName/$1');
+$routes->post('/proveedores/add', 'ProveedoresController::create');
+$routes->post('/proveedoress/update', 'ProveedoresController::updateproveedores');
+$routes->delete('/proveedores/delete/(:num)', 'ProveedoresController::delete/$1');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
