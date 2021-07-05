@@ -1,45 +1,45 @@
 <?php namespace App\Controllers;
 
-use App\Models\ProductModel;
+use App\Models\MarcaModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class ProductController extends ResourceController
+class MarcaController extends ResourceController
 {
 
     use ResponseTrait;
 
     public function index()
     {
-        $model = new ProductModel();
+        $model = new MarcaModel();
 
         $data = [
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de marcas'
+                'success' => 'Lista de Marcas'
             ]
         ];
 
-        $data['Products'] = $model->orderBy('prd_id', 'DESC')->findAll();
+        $data['Marcas'] = $model->orderBy('ma_id', 'DESC')->findAll();
 
         return $this->respond($data);
     }
 
-    public function getProduct($id = null)
+    public function getMarca($id = null)
     {
-        $model = new ProductModel();
+        $model = new MarcaModel();
 
-        $response = $model->where('prd_id', $id)->first();
+        $response = $model->where('ma_id', $id)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Marca Encontrada'
                 ],
-                'Product'  => $response
+                'Marca'  => $response
             ];
 
             return $this->respond($data);
@@ -48,7 +48,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Marca No Existe'
                 ]
             ];
 
@@ -58,19 +58,19 @@ class ProductController extends ResourceController
 
     }
 
-    public function getProductName($name = null)
+    public function getMarcaName($name = null)
     {
-        $model    = new ProductModel();
-        $response = $model->where('prd_nombre', $name)->first();
+        $model    = new MarcaModel();
+        $response = $model->where('ma_nombre', $name)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Marca Encontrada'
                 ],
-                'Product'  => $response
+                'Marca'  => $response
             ];
 
             return $this->respond($data);
@@ -79,7 +79,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Marca No Existe'
                 ]
             ];
 
@@ -90,51 +90,43 @@ class ProductController extends ResourceController
 
     public function create()
     {
-        $model = new ProductModel();
+        $model = new MarcaModel();
         $data  = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
-            'prd_id'      => $this->request->getVar('prd_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'ma_nombre' => $this->request->getVar('ma_nombre'),
+            'ma_active'   => $this->request->getVar('ma_active'),
+            
         ];
         $model->insert($data);
         $response = [
             'status'   => 201,
             'error'    => false,
             'messages' => [
-                'success' => 'Producto Creado'
+                'success' => 'Marca Creada'
             ]
         ];
         return $this->respondCreated($response);
     }
 
-    public function updateProduct()
+    public function updateMarca()
     {
-        $model  = new ProductModel();
-        $prd_id = $this->request->getVar('prd_id');
+        $model  = new MarcaModel();
+        $ma_id = $this->request->getVar('ma_id');
 
         $data = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
-            'prd_id'      => $this->request->getVar('prd_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'ma_nombre' => $this->request->getVar('ma_nombre'),
+            'ma_active'   => $this->request->getVar('ma_active')
+            
         ];
 
         //$dt = $this->request->getRawInput();
 
         // print_r($dt);
-        $model->update($prd_id, $data);
+        $model->update($ma_id, $data);
         $response = [
             'status'   => 200,
             'error'    => null,
             'messages' => [
-                'success' => 'Producto Actualizado'
+                'success' => 'Marca Actualizada'
             ]
         ];
         return $this->respond($response);
@@ -142,20 +134,20 @@ class ProductController extends ResourceController
 
     public function delete($id = null)
     {
-        $model = new ProductModel();
-        $data  = $model->where('prd_id', $id)->delete($id);
+        $model = new MarcaModel();
+        $data  = $model->where('ma_id', $id)->delete($id);
         if ($data) {
             $model->delete($id);
             $response = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Eliminado'
+                    'success' => 'Marca Eliminada'
                 ]
             ];
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Producto No Existe');
+            return $this->failNotFound('Marca No Existe');
         }
     }
 

@@ -37,8 +37,17 @@ $routes->get('/products', 'ProductController::index');
 $routes->get('/products/(:num)', 'ProductController::getProduct/$1');
 $routes->get('/products/(:any)', 'ProductController::getProductName/$1');
 $routes->post('/products/add', 'ProductController::create');
-$routes->put('/products/update/(:num)', 'ProductController::update/$1');
+$routes->post('/products/update', 'ProductController::updateProduct');
 $routes->delete('/products/delete/(:num)', 'ProductController::delete/$1');
+
+// rutas de marcas
+$routes->get('/marcas', 'MarcaController::index');
+$routes->get('/marcas/(:num)', 'MarcaController::getMarca/$1');
+$routes->get('/marcas/(:any)', 'MarcaController::getMarcaName/$1');
+$routes->post('/marcas/add', 'MarcaController::create');
+$routes->post('/marcas/update', 'MarcaController::updateMarca');
+$routes->delete('/marcas/delete/(:num)', 'MarcaController::delete/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
