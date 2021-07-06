@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-07-2021 a las 19:52:32
+-- Tiempo de generación: 06-07-2021 a las 03:45:34
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -55,7 +55,7 @@ CREATE TABLE `marcas` (
 
 INSERT INTO `marcas` (`ma_id`, `ma_nombre`, `ma_active`) VALUES
 (1, 'TOYS', 'SI'),
-(2, 'LEGO', 'NO'),
+(2, 'LEGO', 'SI'),
 (3, 'MATEL', 'SI');
 
 -- --------------------------------------------------------
@@ -74,7 +74,8 @@ CREATE TABLE `perfiles` (
 --
 
 INSERT INTO `perfiles` (`per_id`, `per_nombre`) VALUES
-(1, 'admin');
+(1, 'LEGO'),
+(2, 'MATTEL');
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,9 @@ INSERT INTO `products` (`prd_id`, `prd_nombre`, `prd_cost`, `prd_price`, `prd_st
 (6, 'MUÑECO 6', '893.00', '8900.00', 10, 1, 1, 'Imagen6.jpg', 1),
 (7, 'MUÑECO 7', '790.00', '9000.00', 10, 2, 1, 'Imagen7.jpg', 1),
 (8, 'MUÑECO 8', '678.00', '99000.00', 10, 1, 1, 'Imagen8.jpg', 1),
-(9, 'MUÑECO 9', '8909.00', '98000.00', 10, 3, 1, 'Imagen9.jpg', 1);
+(9, 'MUÑECO 9', '8909.00', '98000.00', 10, 3, 1, 'Imagen9.jpg', 1),
+(10, 'MUÑECO VIEJO', '51000.00', '12000.00', 92, 2, 1, 'Image3.jpg', 1),
+(12, 'PRUEBA :)', '51000.00', '12000.00', 92, 2, 1, 'Image3.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -139,7 +142,7 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`pro_id`, `pro_nit`, `pro_nombre`) VALUES
-(1, '12345658', 'MATELL');
+(1, '12345658', 'LEGOS');
 
 -- --------------------------------------------------------
 
@@ -268,25 +271,25 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
-  MODIFY `ma_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ma_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
 ALTER TABLE `perfiles`
-  MODIFY `per_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `per_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

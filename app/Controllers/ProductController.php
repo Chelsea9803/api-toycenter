@@ -9,6 +9,24 @@ class ProductController extends ResourceController
 
     use ResponseTrait;
 
+    public function getHome()
+    {
+        $model = new ProductModel();
+
+        $data = [
+            'status'   => 200,
+            'error'    => false,
+            'messages' => [
+                'success' => 'Lista de toys'
+            ]
+        ];
+
+        $data['lista'] = $model->getHome();
+
+        return $this->respond($data);
+
+    }
+
     public function index()
     {
         $model = new ProductModel();

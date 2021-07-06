@@ -37,6 +37,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/products', 'ProductController::index');
 $routes->get('/products/(:num)', 'ProductController::getProduct/$1');
+$routes->get('/products/all', 'ProductController::getHome');
 $routes->get('/products/(:any)', 'ProductController::getProductName/$1');
 $routes->post('/products/add', 'ProductController::create');
 $routes->post('/products/update', 'ProductController::updateProduct');
