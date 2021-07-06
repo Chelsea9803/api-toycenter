@@ -1,45 +1,45 @@
 <?php namespace App\Controllers;
 
-use App\Models\ProveedoresModel;
+use App\Models\PerfilesModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class ProveedoresController extends ResourceController
+class PerfilesController extends ResourceController
 {
 
     use ResponseTrait;
 
     public function index()
     {
-        $model = new ProveedoresModel();
+        $model = new PerfilesModel();
 
         $data = [
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de Proveedores'
+                'success' => 'Lista de perfiles'
             ]
         ];
 
-        $data['Proveedores'] = $model->orderBy('pro_id', 'DESC')->findAll();
+        $data['Perfiles'] = $model->orderBy('per_id', 'DESC')->findAll();
 
         return $this->respond($data);
     }
 
-    public function getProveedores($id = null)
+    public function getPerfiles($id = null)
     {
-        $model = new ProveedoresModel();
+        $model = new PerfilesModel();
 
-        $response = $model->where('pro_id', $id)->first();
+        $response = $model->where('per_id', $id)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Proveedor Encontrado'
+                    'success' => 'Perfil Encontrado'
                 ],
-                'Proveedores'  => $response
+                'Perfiles'  => $response
             ];
 
             return $this->respond($data);
@@ -48,7 +48,7 @@ class ProveedoresController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Proveedor No Existe'
+                    'success' => 'Perfil No Existe'
                 ]
             ];
 
@@ -58,19 +58,19 @@ class ProveedoresController extends ResourceController
 
     }
 
-    public function getProveedoresName($name = null)
+    public function getPerfilesName($name = null)
     {
-        $model    = new ProveedoresModel();
-        $response = $model->where('pro_nombre', $name)->first();
+        $model    = new PerfilesModel();
+        $response = $model->where('per_nombre', $name)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Proveedor Encontrado'
+                    'success' => 'Perfil Encontrado'
                 ],
-                'Proveedor'  => $response
+                'Perfiles'  => $response
             ];
 
             return $this->respond($data);
@@ -79,7 +79,7 @@ class ProveedoresController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Proveedor No Existe'
+                    'success' => 'Perfiles No Existe'
                 ]
             ];
 
@@ -90,64 +90,62 @@ class ProveedoresController extends ResourceController
 
     public function create()
     {
-        $model = new ProveedoresModel();
+        $model = new PerfilesModel();
         $data  = [
-            'pro_nombre' => $this->request->getVar('pro_nombre')
+            'per_nombre' => $this->request->getVar('per_nombre')
             
-           
         ];
         $model->insert($data);
         $response = [
             'status'   => 201,
             'error'    => false,
             'messages' => [
-                'success' => 'Proveedor Creado'
+                'success' => 'Perfil Creado'
             ]
         ];
         return $this->respondCreated($response);
     }
 
-    public function updateProveedores()
+    public function updatePerfiles()
     {
-        $model  = new ProveedoresModel();
-        $pro_id = $this->request->getVar('pro_id');
+        $model  = new PerfilesModel();
+        $per_id = $this->request->getVar('per_id');
 
         $data = [
-            'pro_nombre' => $this->request->getVar('pro_nombre')
-            
-            
+            'per_nombre' => $this->request->getVar('per_nombre')
+           
         ];
 
         //$dt = $this->request->getRawInput();
 
         // print_r($dt);
-        $model->update($pro_id, $data);
+        $model->update($per_id, $data);
         $response = [
             'status'   => 200,
             'error'    => null,
             'messages' => [
-                'success' => 'Proveedor Actualizado'
+                'success' => 'Perfil Actualizado'
             ]
         ];
         return $this->respond($response);
     }
 
-    public function delete($pro_id = null)
+    public function delete($per_id = null)
     {
-        $model = new ProveedoresModel();
-        $data  = $model->where('pro_id', $pro_id)->delete($pro_id);
+        $model = new PerfilesModel();
+        $data  = $model->where('per_id', $per_id)->delete($per_id);
         if ($data) {
-            $model->delete($pro_id);
+            $model->delete($per_id);
             $response = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Proveedor Eliminado'
+                    'success' => 'Perfil Eliminado'
                 ]
             ];
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Proveedor No Existe');
+            return $this->failNotFound('Perfiles No Existe');
         }
     }
 
