@@ -1,45 +1,45 @@
 <?php namespace App\Controllers;
 
-use App\Models\ProductModel;
+use App\Models\UsuariosModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class ProductController extends ResourceController
+class UsuariosController extends ResourceController
 {
 
     use ResponseTrait;
 
     public function index()
     {
-        $model = new ProductModel();
+        $model = new UsuariosModel();
 
         $data = [
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de productos'
+                'success' => 'Lista de usuarios'
             ]
         ];
 
-        $data['Products'] = $model->orderBy('prd_id', 'DESC')->findAll();
+        $data['Usuarios'] = $model->orderBy('user_id', 'DESC')->findAll();
 
         return $this->respond($data);
     }
 
-    public function getProduct($id = null)
+    public function getUsuarios($id = null)
     {
-        $model = new ProductModel();
+        $model = new UsuariosModel();
 
-        $response = $model->where('prd_id', $id)->first();
+        $response = $model->where('user_id', $id)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Usuario Encontrado'
                 ],
-                'Product'  => $response
+                'Usuario'  => $response
             ];
 
             return $this->respond($data);
@@ -48,7 +48,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Usuario No Existe'
                 ]
             ];
 
@@ -58,19 +58,19 @@ class ProductController extends ResourceController
 
     }
 
-    public function getProductName($name = null)
+    public function getUsuariosName($name = null)
     {
-        $model    = new ProductModel();
-        $response = $model->where('prd_nombre', $name)->first();
+        $model    = new UsuariosModel();
+        $response = $model->where('user_nombre', $name)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Usuario Encontrado'
                 ],
-                'Product'  => $response
+                'Usuario'  => $response
             ];
 
             return $this->respond($data);
@@ -79,7 +79,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Usuario No Existe'
                 ]
             ];
 
@@ -90,72 +90,72 @@ class ProductController extends ResourceController
 
     public function create()
     {
-        $model = new ProductModel();
+        $model = new UsuariosModel();
         $data  = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
-            'ma_id'      => $this->request->getVar('ma_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'user_nombre' => $this->request->getVar('user_nombre'),
+            'user_email'   => $this->request->getVar('user_email'),
+            'user_pass'  => $this->request->getVar('user_pass'),
+            'user_active'  => $this->request->getVar('user_active'),
+            'per_id'      => $this->request->getVar('per_id'),
+            'user_update'     => $this->request->getVar('user_update'),
+            'user_std'   => $this->request->getVar('user_std')
         ];
         $model->insert($data);
         $response = [
             'status'   => 201,
             'error'    => false,
             'messages' => [
-                'success' => 'Producto Creado'
+                'success' => 'Usuario Creado'
             ]
         ];
         return $this->respondCreated($response);
     }
 
-    public function updateProduct()
+    public function updateUsuarios()
     {
-        $model  = new ProductModel();
-        $prd_id = $this->request->getVar('prd_id');
+        $model  = new UsuariosModel();
+        $user_id = $this->request->getVar('user_id');
 
         $data = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
-            'ma_id'      => $this->request->getVar('ma_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'user_nombre' => $this->request->getVar('user_nombre'),
+            'user_email'   => $this->request->getVar('user_email'),
+            'user_pass'  => $this->request->getVar('user_pass'),
+            'user_active'  => $this->request->getVar('user_active'),
+            'per_id'      => $this->request->getVar('per_id'),
+            'user_update'     => $this->request->getVar('user_update'),
+            'user_std'   => $this->request->getVar('user_std')
         ];
 
         //$dt = $this->request->getRawInput();
 
         // print_r($dt);
-        $model->update($prd_id, $data);
+        $model->update($user_id, $data);
         $response = [
             'status'   => 200,
             'error'    => null,
             'messages' => [
-                'success' => 'Producto Actualizado'
+                'success' => 'Usuario Actualizado'
             ]
         ];
         return $this->respond($response);
     }
 
-    public function delete($prd_id = null)
+    public function delete($user_id = null)
     {
-        $model = new ProductModel();
-        $data  = $model->where('prd_id', $prd_id)->delete($prd_id);
+        $model = new UsuariosModel();
+        $data  = $model->where('user_id', $user_id)->delete($user_id);
         if ($data) {
-            $model->delete($prd_id);
+            $model->delete($user_id);
             $response = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Eliminado'
+                    'success' => 'Usuario Eliminado'
                 ]
             ];
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Producto No Existe');
+            return $this->failNotFound('Usuario No Existe');
         }
     }
 

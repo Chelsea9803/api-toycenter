@@ -1,27 +1,27 @@
 <?php namespace App\Controllers;
 
-use App\Models\ProductModel;
+use App\Models\VentasModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class ProductController extends ResourceController
+class VentasController extends ResourceController
 {
 
     use ResponseTrait;
 
     public function getHome()
     {
-        $model = new ProductModel();
+        $model = new VentasModel();
 
         $data = [
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de toys'
+                'success' => 'Lista de ventas'
             ]
         ];
 
-        $data['lista'] = $model->getHome();
+        $data['Ventas'] = $model->getHome();
 
         return $this->respond($data);
 
@@ -29,35 +29,35 @@ class ProductController extends ResourceController
 
     public function index()
     {
-        $model = new ProductModel();
+        $model = new VentasModel();
 
         $data = [
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de productos'
+                'success' => 'Lista de ventas'
             ]
         ];
 
-        $data['Productos'] = $model->orderBy('prd_id', 'DESC')->findAll();
+        $data['Ventas'] = $model->orderBy('ven_id', 'DESC')->findAll();
 
         return $this->respond($data);
     }
 
-    public function getProduct($id = null)
+    public function getVentas($id = null)
     {
-        $model = new ProductModel();
+        $model = new VentasModel();
 
-        $response = $model->where('prd_id', $id)->first();
+        $response = $model->where('ven_id', $id)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Venta Encontrada'
                 ],
-                'Producto'  => $response
+                'Venta'  => $response
             ];
 
             return $this->respond($data);
@@ -66,7 +66,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Venta No Existe'
                 ]
             ];
 
@@ -76,19 +76,19 @@ class ProductController extends ResourceController
 
     }
 
-    public function getProductName($name = null)
+    public function getVentasName($name = null)
     {
-        $model    = new ProductModel();
-        $response = $model->where('prd_nombre', $name)->first();
+        $model    = new VentasModel();
+        $response = $model->where('ven_factura', $name)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Encontrado'
+                    'success' => 'Venta Encontrado'
                 ],
-                'Producto'  => $response
+                'Venta'  => $response
             ];
 
             return $this->respond($data);
@@ -97,7 +97,7 @@ class ProductController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Producto No Existe'
+                    'success' => 'Venta No Existe'
                 ]
             ];
 
@@ -108,22 +108,22 @@ class ProductController extends ResourceController
 
     public function create()
     {
-        $model = new ProductModel();
+        $model = new VentasModel();
         $data  = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
+            'ven_factura' => $this->request->getVar('ven_factura'),
+            'ven_valor'   => $this->request->getVar('ven_valor'),
+            'ven_cant'  => $this->request->getVar('ven_cant'),
+            'cli_id'  => $this->request->getVar('cli_id'),
             'ma_id'      => $this->request->getVar('ma_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'id_user'     => $this->request->getVar('id_user'),
+            'ven_update'   => $this->request->getVar('ven_update')
         ];
         $model->insert($data);
         $response = [
             'status'   => 201,
             'error'    => false,
             'messages' => [
-                'success' => 'Producto Creado'
+                'success' => 'Venta Creado'
             ]
         ];
         return $this->respondCreated($response);
@@ -131,49 +131,49 @@ class ProductController extends ResourceController
 
     public function updateProduct()
     {
-        $model  = new ProductModel();
-        $prd_id = $this->request->getVar('prd_id');
+        $model  = new VentasModel();
+        $ven_id = $this->request->getVar('ven_id');
 
         $data = [
-            'prd_nombre' => $this->request->getVar('prd_nombre'),
-            'prd_cost'   => $this->request->getVar('prd_cost'),
-            'prd_price'  => $this->request->getVar('prd_price'),
-            'prd_stock'  => $this->request->getVar('prd_stock'),
+            'ven_factura' => $this->request->getVar('ven_factura'),
+            'ven_valor'   => $this->request->getVar('ven_valor'),
+            'ven_cant'  => $this->request->getVar('ven_cant'),
+            'cli_id'  => $this->request->getVar('cli_id'),
             'ma_id'      => $this->request->getVar('ma_id'),
-            'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'id_user'     => $this->request->getVar('id_user'),
+            'ven_update'   => $this->request->getVar('ven_update')
         ];
 
         //$dt = $this->request->getRawInput();
 
         // print_r($dt);
-        $model->update($prd_id, $data);
+        $model->update($ven_id, $data);
         $response = [
             'status'   => 200,
             'error'    => null,
             'messages' => [
-                'success' => 'Producto Actualizado'
+                'success' => 'Venta Actualizado'
             ]
         ];
         return $this->respond($response);
     }
 
-    public function delete($prd_id = null)
+    public function delete($ven_id = null)
     {
-        $model = new ProductModel();
-        $data  = $model->where('prd_id', $prd_id)->delete($prd_id);
+        $model = new VentasModel();
+        $data  = $model->where('ven_id', $ven_id)->delete($ven_id);
         if ($data) {
-            $model->delete($prd_id);
+            $model->delete($ven_id);
             $response = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Producto Eliminado'
+                    'success' => 'Venta Eliminado'
                 ]
             ];
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Producto No Existe');
+            return $this->failNotFound('Venta No Existe');
         }
     }
 

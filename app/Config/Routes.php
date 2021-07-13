@@ -67,7 +67,7 @@ $routes->post('/perfiles/add', 'PerfilesController::create');
 $routes->post('/perfiles/update', 'PerfilesController::updatePerfiles');
 $routes->delete('/perfiles/delete/(:num)', 'PerfilesController::delete/$1');
 
-// Rutas Clientes EN PROCESO
+// Rutas Clientes LISTO
 $routes->get('/clientes', 'ClientesController::index');
 $routes->get('/clientes/(:num)', 'ClientesController::getClientes/$1');
 $routes->get('/clientes/(:any)', 'ClientesController::getClientesName/$1');
@@ -84,12 +84,12 @@ $routes->post('/usuarios/update', 'UsuariosController::updateUsuarios');
 $routes->delete('/usuarios/delete/(:num)', 'UsuariosController::delete/$1');
 
 // Rutas Ventas EN PROCESO
-$routes->get('/perfiles', 'PerfilesController::index');
-$routes->get('/perfiles/(:num)', 'PerfilesController::getPerfiles/$1');
-$routes->get('/perfiles/(:any)', 'PerfilesController::getPerfilesName/$1');
-$routes->post('/perfiles/add', 'PerfilesController::create');
-$routes->post('/perfiles/update', 'PerfilesController::updatePerfiles');
-$routes->delete('/perfiles/delete/(:num)', 'PerfilesController::delete/$1');
+$routes->get('/Ventas', 'VentasController::index');
+$routes->get('/Ventas/(:num)', 'VentasController::getVentas/$1');
+$routes->get('/Ventas/(:any)', 'VentasController::getVentasName/$1');
+$routes->post('/Ventas/add', 'VentasController::create');
+$routes->post('/Ventas/update', 'VentasController::updateVentas');
+$routes->delete('/Ventas/delete/(:num)', 'VentasController::delete/$1');
 
 
 

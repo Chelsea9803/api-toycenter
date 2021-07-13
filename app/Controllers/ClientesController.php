@@ -9,6 +9,24 @@ class ClientesController extends ResourceController
 
     use ResponseTrait;
 
+    public function getHome()
+    {
+        $model = new ClientesModel();
+
+        $data = [
+            'status'   => 200,
+            'error'    => false,
+            'messages' => [
+                'success' => 'Lista de clientes'
+            ]
+        ];
+
+        $data['lista'] = $model->getHome();
+
+        return $this->respond($data);
+
+    }
+
     public function index()
     {
         $model = new ClientesModel();
@@ -17,7 +35,7 @@ class ClientesController extends ResourceController
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de Clientes'
+                'success' => 'Lista de clientes'
             ]
         ];
 
@@ -39,7 +57,7 @@ class ClientesController extends ResourceController
                 'messages' => [
                     'success' => 'Cliente Encontrado'
                 ],
-                'Clientes'  => $response
+                'Cliente'  => $response
             ];
 
             return $this->respond($data);
@@ -68,9 +86,9 @@ class ClientesController extends ResourceController
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Clientes Encontrado'
+                    'success' => 'Cliente Encontrado'
                 ],
-                'Clientes'  => $response
+                'Cliente'  => $response
             ];
 
             return $this->respond($data);
@@ -93,12 +111,12 @@ class ClientesController extends ResourceController
         $model = new ClientesModel();
         $data  = [
             'cli_nombre' => $this->request->getVar('cli_nombre'),
-            'user_id'  => $this->request->getVar('cli_correo'),
-            'cli_correo	'  => $this->request->getVar('cli_apellido	'),
-            'cli_apellido'      => $this->request->getVar('cli_nit'),
-            'cli_nit'     => $this->request->getVar('cli_std'),
-            'cli_std'      => $this->request->getVar('cli_nit')
-            
+            'user_id'   => $this->request->getVar('user_id'),
+            'cli_correo'  => $this->request->getVar('cli_correo'),
+            'cli_apellido'  => $this->request->getVar('cli_apellido'),
+            'cli_nit'      => $this->request->getVar('cli_nit'),
+            'cli_std'     => $this->request->getVar('cli_std')
+           
         ];
         $model->insert($data);
         $response = [
@@ -118,11 +136,12 @@ class ClientesController extends ResourceController
 
         $data = [
             'cli_nombre' => $this->request->getVar('cli_nombre'),
-            'user_id'  => $this->request->getVar('cli_correo'),
-            'cli_correo	'  => $this->request->getVar('cli_apellido	'),
-            'cli_apellido'      => $this->request->getVar('cli_nit'),
-            'cli_nit'     => $this->request->getVar('cli_std'),
-            'cli_std'      => $this->request->getVar('cli_nit')
+            'user_id'   => $this->request->getVar('user_id'),
+            'cli_correo'  => $this->request->getVar('cli_correo'),
+            'cli_apellido'  => $this->request->getVar('cli_apellido'),
+            'cli_nit'      => $this->request->getVar('cli_nit'),
+            'cli_std'     => $this->request->getVar('cli_std')
+            
         ];
 
         //$dt = $this->request->getRawInput();
