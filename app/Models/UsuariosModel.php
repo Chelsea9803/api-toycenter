@@ -7,5 +7,5 @@ class UsuariosModel extends Model
 {
     protected $table         = 'toys_bd.users';
     protected $primaryKey    = 'user_id';
-    protected $allowedFields = ['user_id', 'user_nombre', 'user_email ', 'user_pass', 'user_active', 'per_id', 'user_update', 'user_std'];
+    protected $allowedFields = ['user_id', 'user_nombre', 'user_email', 'user_pass', 'user_active', 'per_id', 'user_update', 'user_std'];
 }

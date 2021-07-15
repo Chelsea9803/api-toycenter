@@ -92,7 +92,9 @@ class ProveedoresController extends ResourceController
     {
         $model = new ProveedoresModel();
         $data  = [
-            'pro_nombre' => $this->request->getVar('pro_nombre')
+            'pro_nombre' => $this->request->getVar('pro_nombre'),
+            'pro_nit' => $this->request->getVar('pro_nit')
+
             
            
         ];
@@ -113,7 +115,8 @@ class ProveedoresController extends ResourceController
         $pro_id = $this->request->getVar('pro_id');
 
         $data = [
-            'pro_nombre' => $this->request->getVar('pro_nombre')
+            'pro_nombre' => $this->request->getVar('pro_nombre'),
+            'pro_nit' => $this->request->getVar('pro_nit')
             
             
         ];

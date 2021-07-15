@@ -75,7 +75,7 @@ $routes->post('/clientes/add', 'ClientesController::create');
 $routes->post('/clientes/update', 'ClientesController::updateClientes');
 $routes->delete('/clientes/delete/(:num)', 'ClientesController::delete/$1');
 
-// Rutas Usuarios EN PROCESO
+// Rutas Usuarios LISTO
 $routes->get('/usuarios', 'UsuariosController::index');
 $routes->get('/usuarios/(:num)', 'UsuariosController::getUsuarios/$1');
 $routes->get('/usuarios/(:any)', 'UsuariosController::getUsuariosName/$1');

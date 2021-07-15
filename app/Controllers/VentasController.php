@@ -114,7 +114,7 @@ class VentasController extends ResourceController
             'ven_valor'   => $this->request->getVar('ven_valor'),
             'ven_cant'  => $this->request->getVar('ven_cant'),
             'cli_id'  => $this->request->getVar('cli_id'),
-            'ma_id'      => $this->request->getVar('ma_id'),
+            'ven_tipo'      => $this->request->getVar('ven_tipo'),
             'id_user'     => $this->request->getVar('id_user'),
             'ven_update'   => $this->request->getVar('ven_update')
         ];
@@ -123,13 +123,13 @@ class VentasController extends ResourceController
             'status'   => 201,
             'error'    => false,
             'messages' => [
-                'success' => 'Venta Creado'
+                'success' => 'Venta Creada'
             ]
         ];
         return $this->respondCreated($response);
     }
 
-    public function updateProduct()
+    public function updateVentas()
     {
         $model  = new VentasModel();
         $ven_id = $this->request->getVar('ven_id');
@@ -139,7 +139,7 @@ class VentasController extends ResourceController
             'ven_valor'   => $this->request->getVar('ven_valor'),
             'ven_cant'  => $this->request->getVar('ven_cant'),
             'cli_id'  => $this->request->getVar('cli_id'),
-            'ma_id'      => $this->request->getVar('ma_id'),
+            'ven_tipo'      => $this->request->getVar('ven_tipo'),
             'id_user'     => $this->request->getVar('id_user'),
             'ven_update'   => $this->request->getVar('ven_update')
         ];
@@ -152,7 +152,7 @@ class VentasController extends ResourceController
             'status'   => 200,
             'error'    => null,
             'messages' => [
-                'success' => 'Venta Actualizado'
+                'success' => 'Venta Actualizada'
             ]
         ];
         return $this->respond($response);
