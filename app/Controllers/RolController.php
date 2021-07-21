@@ -109,7 +109,7 @@ class RolController extends ResourceController
     public function updateRol()
     {
         $model  = new RolModel();
-        $rol_id  = $this->request->getVar('rol_id ');
+        $rol_id  = $this->request->getVar('rol_id');
 
         $data = [
             'rol_nombre' => $this->request->getVar('rol_nombre')
