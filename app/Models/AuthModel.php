@@ -1,19 +1,19 @@
-<?php
+<?php 
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ClientesModel extends Model
-{
-    protected $table         = 'toys_bd.cliente';
-    protected $primaryKey    = 'cli_id';
+class AuthModel extends Model{
+    
+    protected $table      = 'toys_bd.users';
+    protected $primaryKey = 'user_id';
 
-    protected $allowedFields = ['cli_nombre', 'user_id', 'cli_correo', 'cli_apellido', 'cli_nit', 'cli_std'];
+    
+    protected $allowedFields = ['user_nombre', 'user_email', 'user_pass', 'rol_id'];
 
     protected $returnType    = 'array';
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
-
 }

@@ -33,8 +33,10 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-// Ruta de Productos LISTO
+
 $routes->get('/', 'Home::index');
+
+// Ruta de Productos LISTO
 $routes->get('/products', 'ProductController::index');
 $routes->get('/products/(:num)', 'ProductController::getProduct/$1');
 $routes->get('/products/all', 'ProductController::getHome');
@@ -59,13 +61,13 @@ $routes->post('/proveedores/add', 'ProveedoresController::create');
 $routes->post('/proveedores/update', 'ProveedoresController::updateProveedores');
 $routes->delete('/proveedores/delete/(:num)', 'ProveedoresController::delete/$1');
 
-// Rutas Perfiles LISTO
-$routes->get('/perfiles', 'PerfilesController::index');
-$routes->get('/perfiles/(:num)', 'PerfilesController::getPerfiles/$1');
-$routes->get('/perfiles/(:any)', 'PerfilesController::getPerfilesName/$1');
-$routes->post('/perfiles/add', 'PerfilesController::create');
-$routes->post('/perfiles/update', 'PerfilesController::updatePerfiles');
-$routes->delete('/perfiles/delete/(:num)', 'PerfilesController::delete/$1');
+// Rutas Roles LISTO
+$routes->get('/rol', 'RolController::index');
+$routes->get('/rol/(:num)', 'RolController::getRol/$1');
+$routes->get('/rol/(:any)', 'RolController::getRolName/$1');
+$routes->post('/rol/add', 'RolController::create');
+$routes->post('/rol/update', 'RolController::updateRol');
+$routes->delete('/rol/delete/(:num)', 'RolController::delete/$1');
 
 // Rutas Clientes LISTO
 $routes->get('/clientes', 'ClientesController::index');
@@ -76,14 +78,16 @@ $routes->post('/clientes/update', 'ClientesController::updateClientes');
 $routes->delete('/clientes/delete/(:num)', 'ClientesController::delete/$1');
 
 // Rutas Usuarios LISTO
-$routes->get('/usuarios', 'UsuariosController::index');
-$routes->get('/usuarios/(:num)', 'UsuariosController::getUsuarios/$1');
-$routes->get('/usuarios/(:any)', 'UsuariosController::getUsuariosName/$1');
-$routes->post('/usuarios/add', 'UsuariosController::create');
-$routes->post('/usuarios/update', 'UsuariosController::updateUsuarios');
-$routes->delete('/usuarios/delete/(:num)', 'UsuariosController::delete/$1');
+$routes->post('/usuario/login', 'AuthController::login'); 
+$routes->get('/usuarios', 'AuthController::index');
+$routes->get('/usuarios/(:num)', 'AuthController::getUsuarios/$1');
+$routes->get('/usuarios/(:any)', 'AuthController::getUsuariosName/$1');
+$routes->post('/usuarios/add', 'AuthController::create');
+$routes->post('/usuarios/update', 'AuthController::updateUsuarios');
+$routes->delete('/usuarios/delete/(:num)', 'AuthController::delete/$1');
 
-// Rutas Ventas EN PROCESO
+
+// Rutas Ventas EN PROCESO (any,add)
 $routes->get('/Ventas', 'VentasController::index');
 $routes->get('/Ventas/(:num)', 'VentasController::getVentas/$1');
 $routes->get('/Ventas/(:any)', 'VentasController::getVentasName/$1');

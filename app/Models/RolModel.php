@@ -3,17 +3,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ClientesModel extends Model
+class RolModel extends Model
 {
-    protected $table         = 'toys_bd.cliente';
-    protected $primaryKey    = 'cli_id';
+    protected $table         = 'toys_bd.rol';
+    protected $primaryKey    = 'rol_id';
 
-    protected $allowedFields = ['cli_nombre', 'user_id', 'cli_correo', 'cli_apellido', 'cli_nit', 'cli_std'];
+    protected $allowedFields = ['rol_nombre'];
 
     protected $returnType    = 'array';
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
-
 }

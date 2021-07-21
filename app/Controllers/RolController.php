@@ -1,45 +1,45 @@
 <?php namespace App\Controllers;
 
-use App\Models\PerfilesModel;
+use App\Models\RolModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class PerfilesController extends ResourceController
+class RolController extends ResourceController
 {
 
     use ResponseTrait;
 
     public function index()
     {
-        $model = new PerfilesModel();
+        $model = new RolModel();
 
         $data = [
             'status'   => 200,
             'error'    => false,
             'messages' => [
-                'success' => 'Lista de perfiles'
+                'success' => 'Lista de roles'
             ]
         ];
 
-        $data['Perfiles'] = $model->orderBy('per_id', 'DESC')->findAll();
+        $data['Rol'] = $model->orderBy('rol_id ', 'DESC')->findAll();
 
         return $this->respond($data);
     }
 
-    public function getPerfiles($id = null)
+    public function getRol($id = null)
     {
-        $model = new PerfilesModel();
+        $model = new RolModel();
 
-        $response = $model->where('per_id', $id)->first();
+        $response = $model->where('rol_id ', $id)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Perfil Encontrado'
+                    'success' => 'Rol Encontrado'
                 ],
-                'Perfiles'  => $response
+                'Rol'  => $response
             ];
 
             return $this->respond($data);
@@ -48,7 +48,7 @@ class PerfilesController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Perfil No Existe'
+                    'success' => 'Rol No Existe'
                 ]
             ];
 
@@ -58,19 +58,19 @@ class PerfilesController extends ResourceController
 
     }
 
-    public function getPerfilesName($name = null)
+    public function getRolName($name = null)
     {
-        $model    = new PerfilesModel();
-        $response = $model->where('per_nombre', $name)->first();
+        $model    = new RolModel();
+        $response = $model->where('rol_nombre', $name)->first();
 
         if ($response) {
             $data = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Perfil Encontrado'
+                    'success' => 'Rol Encontrado'
                 ],
-                'Perfiles'  => $response
+                'Rol'  => $response
             ];
 
             return $this->respond($data);
@@ -79,7 +79,7 @@ class PerfilesController extends ResourceController
                 'status'   => 404,
                 'error'    => true,
                 'messages' => [
-                    'success' => 'Perfiles No Existe'
+                    'success' => 'Rol No Existe'
                 ]
             ];
 
@@ -90,9 +90,9 @@ class PerfilesController extends ResourceController
 
     public function create()
     {
-        $model = new PerfilesModel();
+        $model = new RolModel();
         $data  = [
-            'per_nombre' => $this->request->getVar('per_nombre')
+            'rol_nombre' => $this->request->getVar('rol_nombre')
             
         ];
         $model->insert($data);
@@ -100,52 +100,52 @@ class PerfilesController extends ResourceController
             'status'   => 201,
             'error'    => false,
             'messages' => [
-                'success' => 'Perfil Creado'
+                'success' => 'Rol Creado'
             ]
         ];
         return $this->respondCreated($response);
     }
 
-    public function updatePerfiles()
+    public function updateRol()
     {
-        $model  = new PerfilesModel();
-        $per_id = $this->request->getVar('per_id');
+        $model  = new RolModel();
+        $rol_id  = $this->request->getVar('rol_id ');
 
         $data = [
-            'per_nombre' => $this->request->getVar('per_nombre')
+            'rol_nombre' => $this->request->getVar('rol_nombre')
            
         ];
 
         //$dt = $this->request->getRawInput();
 
         // print_r($dt);
-        $model->update($per_id, $data);
+        $model->update($rol_id , $data);
         $response = [
             'status'   => 200,
             'error'    => null,
             'messages' => [
-                'success' => 'Perfil Actualizado'
+                'success' => 'Rol Actualizado'
             ]
         ];
         return $this->respond($response);
     }
 
-    public function delete($per_id = null)
+    public function delete($rol_id  = null)
     {
-        $model = new PerfilesModel();
-        $data  = $model->where('per_id', $per_id)->delete($per_id);
+        $model = new RolModel();
+        $data  = $model->where('rol_id ', $rol_id )->delete($rol_id );
         if ($data) {
-            $model->delete($per_id);
+            $model->delete($rol_id );
             $response = [
                 'status'   => 200,
                 'error'    => false,
                 'messages' => [
-                    'success' => 'Perfil Eliminado'
+                    'success' => 'Rol Eliminado'
                 ]
             ];
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Perfiles No Existe');
+            return $this->failNotFound('Rol No Existe');
         }
     }
 

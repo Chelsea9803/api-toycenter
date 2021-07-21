@@ -7,7 +7,14 @@ class ProductModel extends Model
 {
     protected $table         = 'toys_bd.products';
     protected $primaryKey    = 'prd_id';
-    protected $allowedFields = ['prd_id', 'prd_nombre', 'prd_cost', 'prd_price', 'prd_stock', 'ma_id', 'pro_id', 'url_prod', 'prd_std'];
+    protected $allowedFields = ['prd_nombre', 'prd_cost', 'prd_price', 'prd_stock', 'ma_id', 'pro_id', 'url_prod', 'prd_std'];
+
+    protected $returnType    = 'array';
+    protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+
 
 public function getHome()
     {

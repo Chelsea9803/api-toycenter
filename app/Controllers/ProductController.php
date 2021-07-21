@@ -116,7 +116,8 @@ class ProductController extends ResourceController
             'prd_stock'  => $this->request->getVar('prd_stock'),
             'ma_id'      => $this->request->getVar('ma_id'),
             'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'url_prod'   => $this->request->getVar('url_prod'),
+            'prd_std'    => $this->request->getVar('prd_std')
         ];
         $model->insert($data);
         $response = [
@@ -141,7 +142,9 @@ class ProductController extends ResourceController
             'prd_stock'  => $this->request->getVar('prd_stock'),
             'ma_id'      => $this->request->getVar('ma_id'),
             'pro_id'     => $this->request->getVar('pro_id'),
-            'url_prod'   => $this->request->getVar('url_prod')
+            'url_prod'   => $this->request->getVar('url_prod'),
+            'prd_std'    => $this->request->getVar('prd_std')
+
         ];
 
         //$dt = $this->request->getRawInput();

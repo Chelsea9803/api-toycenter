@@ -115,8 +115,7 @@ class VentasController extends ResourceController
             'ven_cant'  => $this->request->getVar('ven_cant'),
             'cli_id'  => $this->request->getVar('cli_id'),
             'ven_tipo'      => $this->request->getVar('ven_tipo'),
-            'id_user'     => $this->request->getVar('id_user'),
-            'ven_update'   => $this->request->getVar('ven_update')
+            'id_user'     => $this->request->getVar('id_user')           
         ];
         $model->insert($data);
         $response = [
@@ -140,8 +139,8 @@ class VentasController extends ResourceController
             'ven_cant'  => $this->request->getVar('ven_cant'),
             'cli_id'  => $this->request->getVar('cli_id'),
             'ven_tipo'      => $this->request->getVar('ven_tipo'),
-            'id_user'     => $this->request->getVar('id_user'),
-            'ven_update'   => $this->request->getVar('ven_update')
+            'id_user'     => $this->request->getVar('id_user')
+            
         ];
 
         //$dt = $this->request->getRawInput();
