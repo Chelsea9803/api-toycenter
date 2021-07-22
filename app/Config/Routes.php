@@ -51,7 +51,7 @@ $routes->get('/marcas/(:num)', 'MarcaController::getMarca/$1');
 $routes->get('/marcas/(:any)', 'MarcaController::getMarcaName/$1');
 $routes->post('/marcas/add', 'MarcaController::create');
 $routes->post('/marcas/update', 'MarcaController::updateMarca');
-$routes->delete('/marcas/delete/(:num)', 'MarcaController::delete/$1');
+$routes->post('/marcas/delete', 'MarcaController::deleteM');
 
 // Rutas Proveedores LISTO
 $routes->get('/proveedores', 'ProveedoresController::index');

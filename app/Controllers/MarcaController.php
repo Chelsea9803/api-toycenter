@@ -132,8 +132,10 @@ class MarcaController extends ResourceController
         return $this->respond($response);
     }
 
-    public function delete($id = null)
+    public function deleteM()
     {
+        $id = $this->request->getVar('ma_id');
+        
         $model = new MarcaModel();
         $data  = $model->where('ma_id', $id)->delete($id);
         if ($data) {

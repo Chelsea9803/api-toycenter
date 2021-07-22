@@ -20,10 +20,10 @@ public function getHome()
     {
 
         $db      = db_connect();
-        $builder = $db->table("toys_bd.products as p");
-        $builder->join('toys_bd.proveedores pr', 'pr.pro_id=p.pro_id');
-        $builder->join('toys_bd.marcas m', 'm.ma_id=p.ma_id');
+        $builder = $db->table("toys_bd.gethome");       
         $aResult = $builder->get()->getResultArray();
         return $aResult;
     }
+
+   
 }

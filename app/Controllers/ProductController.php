@@ -9,7 +9,7 @@ class ProductController extends ResourceController
 
     use ResponseTrait;
 
-    public function getHome()
+    public function index()
     {
         $model = new ProductModel();
 
@@ -21,13 +21,13 @@ class ProductController extends ResourceController
             ]
         ];
 
-        $data['lista'] = $model->getHome();
+        $data['lista'] = $model->getHome();    
 
         return $this->respond($data);
 
     }
 
-    public function index()
+    public function indexk()
     {
         $model = new ProductModel();
 
